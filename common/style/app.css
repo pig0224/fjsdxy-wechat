@@ -26,3 +26,11 @@
 .hover-on {
 	background-color: #f9f9f9;
 }
+
+.display-none{
+	display: none !important;
+}
+
+.display-block{
+	display: block !important;
+}
