@@ -1774,7 +1774,7 @@ button.icon.lg {
 	font-size: 32upx;
 	line-height: 60upx;
 	cursor: none;
-	pointer-events: none;
+	/* pointer-events: none; */
 	text-overflow: ellipsis;
 	white-space: nowrap;
 	overflow: hidden;

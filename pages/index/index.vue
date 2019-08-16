@@ -3,15 +3,8 @@
 		<view v-if="PageCur=='index'">			
 			<home></home>
 		</view>
-		<view v-if="PageCur=='kcb'">
-			<cu-custom>
-				<block slot="content">
-					<view class='logo-image'>
-						<image src="/static/logo.png"></image>
-					</view>
-				</block>
-			</cu-custom>
-			<source></source>
+		<view v-if="PageCur=='kcb'">			
+			<sources></sources>
 		</view>
 		<view v-if="PageCur=='student'">
 			<cu-custom bgColor="bg-black"></cu-custom>
@@ -44,20 +37,12 @@
 	export default {
 		data() {
 			return {
-				PageCur: 'index',
-				fabuDelay: false
+				PageCur: 'index'
 			}
-		},
-		onLoad() {
-			this.changeOpt()
 		},
 		methods: {
 			NavChange: function(e) {
 				this.PageCur = e.currentTarget.dataset.cur
-				this.changeOpt()
-			},
-			changeOpt: function() {
-
 			}
 		}
 	}

@@ -4,8 +4,8 @@ import App from './App'
  import home from './pages/component/home/home.vue'
  Vue.component('home',home)
  
- import source from './pages/component/source/source.vue'
- Vue.component('source',source)
+ import sources from './pages/component/source/source.vue'
+ Vue.component('sources',sources)
  
  import student from './pages/component/student/student.vue'
  Vue.component('student',student)

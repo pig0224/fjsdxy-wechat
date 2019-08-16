@@ -3,13 +3,15 @@
 		{
 			"path": "pages/index/index",
 			"style": {
-				"disableScroll":true,
+				"disableScroll": true,
 				"navigationBarTextStyle": "black",
 				"navigationBarTitleText": ""
 			}
 		}, {
 			"path": "pages/component/home/home",
-			"style": {}
+			"style": {
+				"disableScroll": true
+			}
 		}, {
 			"path": "pages/component/source/source",
 			"style": {}
