@@ -7,7 +7,6 @@
 			<sources></sources>
 		</view>
 		<view v-if="PageCur=='student'">
-			<cu-custom bgColor="bg-black"></cu-custom>
 			<student></student>
 		</view>
 		<view class="cu-bar tabbar bg-white shadow foot">

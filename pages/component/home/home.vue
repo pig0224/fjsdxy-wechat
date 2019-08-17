@@ -41,13 +41,13 @@
 										<text>
 											15
 											<text class="week-text">周</text>
-										</text>										
+										</text>
 									</view>
 									<view class="desc">
 										<view class="text-content">
 											<view class="class-name">
 												<text>
-												大学生心理健康教育
+													大学生心理健康教育
 												</text>
 											</view>
 										</view>
@@ -214,18 +214,21 @@
 	.today {
 		padding-right: 30upx;
 	}
-	.class-card{
+
+	.class-card {
 		height: 240upx;
 		display: block;
 		overflow: hidden;
 	}
-	.class-card>.cu-item{
+
+	.class-card>.cu-item {
 		height: 240upx;
 		display: block;
 		background-color: var(--white);
 		overflow: hidden;
 		border-radius: 10upx;
 	}
+
 	.class-card>.cu-item .content {
 		height: 240upx;
 		flex: 1;
@@ -233,6 +236,7 @@
 		flex-direction: row;
 		justify-content: space-between;
 	}
+
 	.class-card>.cu-item .desc {
 		height: 240upx;
 		flex: 1;
@@ -240,12 +244,14 @@
 		flex-direction: column;
 		justify-content: space-between;
 	}
+
 	.class-card>.cu-item .content .text-content {
 		font-size: 28upx;
 		color: #888;
 		height: 4.8em;
 		overflow: hidden;
 	}
+
 	.next-class {
 		min-height: 300upx;
 		border-radius: 0 0 15upx 15upx;
@@ -253,35 +259,46 @@
 		justify-content: center;
 		align-items: center;
 	}
-	.week{
+
+	.week {
 		width: 200upx;
 		height: 240upx;
 		margin-right: 20upx;
 	}
-	.week text{
+
+	.week text {
 		font-size: 120upx;
 		line-height: 240upx;
 	}
-	.week-text{
+
+	.week-text {
 		font-size: 46upx !important;
 		padding-left: 10upx;
 	}
-	.class-name{
+
+	.class-name {
 		height: 100%;
 		display: flex;
 		flex-direction: column;
-		justify-content: center;
+		justify-content: flex-start;
 	}
-	.class-name text{
+
+	.class-name text {
 		font-size: 40upx;
 		text-align: center;
+		display: -webkit-box;
+		-webkit-box-orient: vertical;
+		-webkit-line-clamp: 2;
+		overflow: hidden;
 	}
-	.class-info{
+
+	.class-info {
 		margin: 0 auto;
-		width: 320upx;		
+		width: 320upx;
 	}
-	.class-time{
-		width: 100%;		
+
+	.class-time {
+		width: 100%;
 		margin-bottom: 10upx;
 	}
 </style>

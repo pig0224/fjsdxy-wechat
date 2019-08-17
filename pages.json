@@ -9,17 +9,23 @@
 			}
 		}, {
 			"path": "pages/component/home/home",
+			"style": {}
+		}, {
+			"path": "pages/component/source/source",
 			"style": {
 				"disableScroll": true
 			}
 		}, {
-			"path": "pages/component/source/source",
-			"style": {}
-		}, {
 			"path": "pages/component/student/student",
 			"style": {}
 		}
-	],
+	    ,{
+            "path" : "pages/component/home/about/about",
+            "style" : {
+				"backgroundColor":"#f4f4f4"
+			}
+        }
+    ],
 	"globalStyle": {
 		"mp-alipay": {
 			/* 支付宝小程序特有相关 */
