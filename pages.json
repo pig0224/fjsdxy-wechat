@@ -20,7 +20,7 @@
 			"style": {}
 		}
 	    ,{
-            "path" : "pages/component/home/about/about",
+            "path" : "pages/component/student/about/about",
             "style" : {
 				"backgroundColor":"#f4f4f4"
 			}

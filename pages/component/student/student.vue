@@ -1,6 +1,6 @@
 <template>
 	<scroll-view scroll-y class="scrollPage">
-		<view class="UCenter-bg">
+		<view class="UCenter-bg" @click="login">
 			<image src="/static/avator.jpg" class="round" mode="widthFix"></image>
 
 			<view class="margin-top-sm">
@@ -23,7 +23,7 @@
 			</view>
 		</view>
 		<view class="cu-list menu margin-top-xl margin-bottom-xl shadow-lg">
-			<view class="cu-item">
+			<!-- <view class="cu-item">
 				<navigator class="content" url="/pages/about/test/list" hover-class="none">
 					<text class="cuIcon-noticefill text-orange"></text>
 					<text class="text-grey">上课通知</text>
@@ -31,7 +31,7 @@
 				<view class="action">
 					<switch @change="MenuCard" :class="menuCard?'checked':''" :checked="menuCard?true:false"></switch>
 				</view>
-			</view>
+			</view> -->
 			<view class="cu-item arrow">
 				<view class="content" @click="showQrcode">
 					<text class="cuIcon-appreciatefill text-red"></text>
@@ -45,7 +45,7 @@
 				</button>
 			</view>
 			<view class="cu-item arrow">
-				<navigator class="content" url="/pages/component/home/about/about" hover-class="none">
+				<navigator class="content" url="/pages/component/student/about/about" hover-class="none">
 					<text class="cuIcon-github text-grey"></text>
 					<text class="text-grey">关于We水院</text>
 				</navigator>
@@ -77,8 +77,21 @@
 					current: 'https://image.weilanwl.com/color2.0/zanCode.jpg' // 当前显示图片的http链接    
 				})
 			},
-			CopyLink() {
-
+			login() {
+				uni.login({
+					provider: 'weixin',
+					success: function(loginRes) {
+						console.log(loginRes);
+						// 获取用户信息
+						uni.getUserInfo({
+							provider: 'weixin',
+							success: function(infoRes) {
+								console.log(infoRes);
+								console.log('用户昵称为：' + infoRes);
+							}
+						});
+					}
+				});
 			}
 		}
 	}

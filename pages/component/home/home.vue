@@ -23,7 +23,7 @@
 							<text class="cuIcon-title text-theme "></text> 下节课
 						</view>
 						<view class="action">
-							<text class="today">2019/08/16</text>
+							<text class="today">2019-08-16</text>
 							<view class="cu-tag bg-theme round shadow-warp" style="color: #fff;">
 								星期五
 							</view>

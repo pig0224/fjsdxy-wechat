@@ -39,10 +39,10 @@
 			</view>
 			<view class="table-main bg-white">
 				<view class="source-time">
-					<view class="time-item" v-for="(item,index) in 8" :key="index">
-						<text class="class-begin">08:00</text>
+					<view class="time-item" v-for="(item,index) in classTime" :key="index">
+						<text class="class-begin">{{item.begin}}</text>
 						<text class="class-num">{{index+1}}</text>
-						<text class="class-over">09:00</text>
+						<text class="class-over">{{item.over}}</text>
 					</view>
 				</view>
 				<view class="class-course">
@@ -95,12 +95,54 @@
 					"time": "08-16",
 					"isWeek": false
 				}],
+				"classTime":[
+					{
+						"begin":"08:00",
+						"over":"08:45"
+					},
+					{
+						"begin":"08:50",
+						"over":"09:35"
+					},
+					{
+						"begin":"10:05",
+						"over":"10:50"
+					},
+					{
+						"begin":"10:55",
+						"over":"11:40"
+					},
+					{
+						"begin":"14:30",
+						"over":"15:15"
+					},
+					{
+						"begin":"15:20",
+						"over":"16:05"
+					},
+					{
+						"begin":"16:15",
+						"over":"17:00"
+					},
+					{
+						"begin":"17:05",
+						"over":"17:50"
+					},
+					{
+						"begin":"19:00",
+						"over":"19:45"
+					},
+					{
+						"begin":"19:50",
+						"over":"20:35"
+					},
+				],
 				"course": [
-					["1A", "1B", "1C", "1D", "1E", "1F", "1G", "1H"],
-					["2A", "2B", "2C", "2D", "2E", "2F", "2G", "2H"],
-					["3A", "3B", "3C", "3D", "3E", "3F", "3G", "3H"],
-					["4A", "4B", "4C", "4D", "4E", "4F", "4G", "4H"],
-					["5A", "5B", "5C", "5D", "5E", "5F", "5G", "5H"]
+					["1A", "1B", "1C", "1D", "1E", "1F", "1G", "1H","1I","1J"],
+					["2A", "2B", "2C", "2D", "2E", "2F", "2G", "2H","2I","2J"],
+					["3A", "3B", "3C", "3D", "3E", "3F", "3G", "3H","3I","3J"],
+					["4A", "4B", "4C", "4D", "4E", "4F", "4G", "4H","4I","4J"],
+					["5A", "5B", "5C", "5D", "5E", "5F", "5G", "5H","5I","5J"]
 				],
 				courses: [
 					["java程序基础", "1EF", "综合楼517", "肖祥"],

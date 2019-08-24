@@ -66,11 +66,12 @@
 </template>
 
 <script>
+	import Vue from 'vue'
 	export default {
 		data() {
 			return {
 				showLog: false,
-				version: "1.0.0",
+				version: Vue.version,
 				year: new Date().getFullYear()
 			}
 		},
