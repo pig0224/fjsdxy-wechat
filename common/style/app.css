@@ -6,7 +6,7 @@
 	color: #49C628;
 }
 .bg-gradual-theme{
-	background-image: linear-gradient(45deg, #70F570, #49C628);
+	background-image: linear-gradient(45deg, #49C628, #70F570);
 	color: var(--white);
 }
 /*适配iphonex底部*/

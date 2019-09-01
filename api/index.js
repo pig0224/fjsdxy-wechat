@@ -49,3 +49,28 @@ export const getWeekInfo = (date) => {
 	var getWeekUrl = "/week/get_week_info/" + date
 	return request.get(getWeekUrl)
 }
+
+export const pullExam = () =>{
+	return request.get('/exam/pull')
+}
+
+export const getExam = () =>{
+	return request.get('/exam/get')
+}
+
+export const getEcardAccount = () =>{
+	return request.get('/ecard/get')
+}
+
+export const getLeaveList = () =>{
+	return request.get('/leave/get_list')
+}
+
+export const revokeLeave = (Id) =>{
+	var revokeLeaveUrl = "/leave/revoke/" + Id
+	return request.get(revokeLeaveUrl)
+}
+
+export const applyLeave = (data) => {
+	return request.post('/leave/apply', data)
+}

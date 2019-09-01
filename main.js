@@ -14,7 +14,7 @@ Vue.component('student', student)
 import cuCustom from './colorui/components/cu-custom.vue'
 Vue.component('cu-custom', cuCustom)
 
-Vue.version = 'v0.0.1' //版本号
+Vue.version = 'v1.0.0' //版本号
 Vue.prototype.$store = store
 Vue.config.productionTip = false
 

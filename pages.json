@@ -18,17 +18,40 @@
 		}, {
 			"path": "pages/component/student/student",
 			"style": {}
-		}
-	    ,{
-            "path" : "pages/component/student/about/about",
-            "style" : {
-				"backgroundColor":"#f4f4f4"
+		}, {
+			"path": "pages/component/student/about/about",
+			"style": {
+				"backgroundColor": "#f4f4f4"
 			}
-        }, {
+		}, {
+			"path": "pages/component/exam/exam",
+			"style": {
+				"backgroundColor": "#ffffff",
+				"enablePullDownRefresh": true
+			}
+		},
+		{
 			"path": "pages/component/bind/bind",
+			"style": {
+				"backgroundColor": "#ffffff",
+				"enablePullDownRefresh": true
+			}
+		},
+		{
+			"path": "pages/component/leave/leave",
+			"style": {
+				"enablePullDownRefresh": true
+			}
+		},
+		{
+			"path": "pages/component/leave/apply",
+			"style": {}
+		},
+		{
+			"path": "pages/component/ecard/ecard",
 			"style": {}
 		}
-    ],
+	],
 	"globalStyle": {
 		"mp-alipay": {
 			/* 支付宝小程序特有相关 */
