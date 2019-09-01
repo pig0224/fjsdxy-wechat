@@ -1,25 +1,36 @@
 <template>
 	<scroll-view scroll-y class="scrollPage">
-		<view class="UCenter-bg" @click="login">
-			<image src="/static/avator.jpg" class="round" mode="widthFix"></image>
-
-			<view class="margin-top-sm">
-				<text class="text-xl">小猪</text>
+		<view v-if="userInfo.userId">
+			<view class="UCenter-bg">
+				<image :src="userInfo.avator" class="round" mode="widthFix"></image>
+				<view class="margin-top-sm">
+					<text class="text-xl">{{userInfo.nickName}}</text>
+				</view>
+				<image src="/static/wave.gif" mode="scaleToFill" class="gif-wave"></image>
 			</view>
-			<image src="https://image.weilanwl.com/gif/wave.gif" mode="scaleToFill" class="gif-wave"></image>
 		</view>
-		<view class="padding flex text-center text-grey bg-white shadow-warp">
+		<view v-else>
+			<view class="UCenter-bg" @click="LoginMoal">
+				<image src="/static/avator.jpg" class="round" mode="widthFix"></image>
+				<view class="margin-top-sm">
+					<text class="text-xl">未登录</text>
+				</view>
+				<image src="/static/wave.gif" mode="scaleToFill" class="gif-wave"></image>
+			</view>
+		</view>
+
+		<view class="padding flex text-center text-grey bg-white shadow-warp" :class="(userInfo.userId&&userInfo.isBind)?'':'display-none'">
 			<view class="flex flex-sub flex-direction solid-right align-center">
 				<view class="margin-bottom-sm">专业</view>
-				<view class="text-xl text-orange text-cut" style="max-width: 200upx;">软件技术</view>
+				<view class="text-xl text-orange text-cut" style="max-width: 200upx;">{{studentInfo.major}}</view>
 			</view>
 			<view class="flex flex-sub flex-direction solid-right align-center">
 				<view class="margin-bottom-sm">姓名</view>
-				<view class="text-xl text-blue text-cut" style="max-width: 200upx;">陈逢柱</view>
+				<view class="text-xl text-blue text-cut" style="max-width: 200upx;">{{studentInfo.name}}</view>
 			</view>
 			<view class="flex flex-sub flex-direction align-center">
 				<view class="margin-bottom-sm">班级</view>
-				<view class="text-xl text-green text-cut" style="max-width: 200upx;">软件1832</view>
+				<view class="text-xl text-green text-cut" style="max-width: 200upx;">{{studentInfo.className}}</view>
 			</view>
 		</view>
 		<view class="cu-list menu margin-top-xl margin-bottom-xl shadow-lg">
@@ -38,6 +49,7 @@
 					<text class="text-grey">赞赏支持</text>
 				</view>
 			</view>
+
 			<view class="cu-item arrow">
 				<button class="cu-btn content" open-type="feedback">
 					<text class="cuIcon-writefill text-cyan"></text>
@@ -53,10 +65,41 @@
 		</view>
 		<view class="cu-list menu margin-top-xl margin-bottom-xl shadow-lg">
 			<view class="cu-item arrow">
-				<navigator class="content" url="/pages/about/test/list" hover-class="none">
+				<view v-if="userInfo.userId&&userInfo.isBind" class="content" @tap="unBind">
+					<text class="cuIcon-newsfill text-theme"></text>
+					<text class="text-grey">解绑学号</text>
+				</view>
+				<navigator v-else-if="userInfo.userId&&!userInfo.isBind" class="content" url="/pages/component/bind/bind"
+				 hover-class="none">
 					<text class="cuIcon-newsfill text-theme"></text>
 					<text class="text-grey">绑定学号</text>
 				</navigator>
+				<view v-else class="content" @tap="LoginMoal">
+					<text class="cuIcon-people text-theme"></text>
+					<text class="text-grey">微信快捷登录</text>
+				</view>
+			</view>
+		</view>
+		<!-- <view class="login-moal" :class="showlogin?'':'display-none'" @click="LoginMoal()">
+			<view class="login-moal-box">
+				<view class="login-moal-from">
+					<view class="login-moal-content">
+						<button open-type="getUserInfo" class="cu-btn lg bg-theme"><text class="text-white">微信一键登录</text></button>
+					</view>
+				</view>
+			</view>
+		</view> -->
+		<view class="cu-modal" :class="showlogin?'show':''">
+			<view class="cu-dialog">
+				<view class="cu-bar bg-white justify-end">
+					<view class="content">登录</view>
+					<view class="action" @tap="LoginMoal">
+						<text class="cuIcon-close text-red"></text>
+					</view>
+				</view>
+				<view class="padding-xl">
+					<button open-type="getUserInfo" @getuserinfo="login" class="cu-btn lg bg-theme"><text class="text-white">微信一键登录</text></button>
+				</view>
 			</view>
 		</view>
 		<view class="cu-tabbar-height"></view>
@@ -64,10 +107,24 @@
 </template>
 
 <script>
+	import {
+		showToast,
+		getStorage
+	} from '@/util'
+	import {
+		mapState
+	} from 'vuex'
+	import store from '@/store'
+
 	export default {
+		computed: {
+			...mapState('user', ['userInfo']),
+			...mapState('student', ['studentInfo'])
+		},
 		data() {
 			return {
-
+				user: {},
+				showlogin: false
 			}
 		},
 		methods: {
@@ -77,27 +134,57 @@
 					current: 'https://image.weilanwl.com/color2.0/zanCode.jpg' // 当前显示图片的http链接    
 				})
 			},
-			login() {
-				uni.login({
-					provider: 'weixin',
-					success: function(loginRes) {
-						console.log(loginRes);
-						// 获取用户信息
+			LoginMoal() {
+				this.showlogin = !this.showlogin
+			},
+			login(res) {
+				this.showlogin = false
+				var userInfo = res.detail
+				uni.checkSession({
+					async success() {
+						//token不存在重新获取						
+						if (!getStorage('token')) {
+							await store.dispatch('user/wxLogin');
+							//重新获取用户信息							
+							uni.getUserInfo({
+								provider: 'weixin',
+								success: function(infoRes) {									
+									store.dispatch('user/getWxInfo', {
+										encryptedData: infoRes.encryptedData,
+										iv: infoRes.iv
+									})
+								}
+							});							
+						} else {
+							store.dispatch('user/getWxInfo', {
+								encryptedData: userInfo.encryptedData,
+								iv: userInfo.iv
+							})
+						}
+					},
+					async fail() {
+						await store.dispatch('user/wxLogin');
+						//重新获取用户信息
 						uni.getUserInfo({
 							provider: 'weixin',
-							success: function(infoRes) {
-								console.log(infoRes);
-								console.log('用户昵称为：' + infoRes);
+							success: function(infoRes) {									
+								store.dispatch('user/getWxInfo', {
+									encryptedData: infoRes.encryptedData,
+									iv: infoRes.iv
+								})
 							}
-						});
+						});	
 					}
-				});
+				})
+			},
+			unBind() {
+				store.dispatch('student/unBind')
 			}
 		}
 	}
 </script>
 
-<style>
+<style scoped>
 	.scrollPage {
 		height: 100vh;
 	}
@@ -149,5 +236,29 @@
 	.mapBox {
 		width: 750upx;
 		height: 300upx;
+	}
+
+	.login-moal {
+		position: fixed;
+		background: rgba(0, 0, 0, 0.1);
+		top: 0px;
+		left: 0px;
+		right: 0px;
+		height: 100vh;
+	}
+
+	.login-moal .login-moal-box {
+		height: 100vh;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+	}
+
+	.login-moal .login-moal-box .login-moal-from {
+		height: 400upx;
+		width: 600upx;
+		border-radius: 40upx;
+		background: #fff;
 	}
 </style>

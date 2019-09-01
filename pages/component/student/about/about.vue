@@ -83,7 +83,7 @@
 	}
 </script>
 
-<style>
+<style scoped>
 	.container {
 		background: #f4f4f4;
 		padding: 0;

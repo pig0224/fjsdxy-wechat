@@ -277,7 +277,10 @@ export default {
 		 * 返回今天
 		 */
     backtoday () {
-      this.getMonthAll(0, this.date)
+	  var today = new Date();
+	  today.setTime(today.getTime());
+	  var s = today.getFullYear()+"-" + (today.getMonth()+1) + "-" + today.getDate();
+      this.getMonthAll(0, s)
     },
     /**
 		 * 切换前一月 || 后一月

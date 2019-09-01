@@ -1,7 +1,22 @@
 <script>
-	import Vue from 'vue'
+	import Vue from 'vue'	
+	import store from '@/store'
+	
 	export default {
-		onLaunch: function() {
+		created () {			
+			this.getInfo()
+		},	
+		methods:{
+			getInfo(){				
+				if(store.state.user.userInfo.userId){
+					store.dispatch('user/getUserInfo')
+					if (store.state.user.userInfo.isBind) {
+						store.dispatch('student/getStudentInfo')
+					}
+				}
+			}
+		},
+		onLaunch: function() {			
 			//console.log('App Launch')
 			uni.getSystemInfo({
 				success: function(e) {

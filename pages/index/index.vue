@@ -33,6 +33,8 @@
 </template>
 
 <script>
+	import store from '@/store'
+	
 	export default {
 		data() {
 			return {
@@ -42,6 +44,15 @@
 		methods: {
 			NavChange: function(e) {
 				this.PageCur = e.currentTarget.dataset.cur
+				this.getInfo()
+			},
+			getInfo() {
+				if (store.state.user.userInfo.userId) {
+					store.dispatch('user/getUserInfo')
+					if (store.state.user.userInfo.isBind) {
+						store.dispatch('student/getStudentInfo')
+					}
+				}
 			}
 		}
 	}

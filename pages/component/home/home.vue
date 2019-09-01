@@ -3,16 +3,44 @@
 		<scroll-view scroll-y class="page">
 			<image src="/static/home_bg.png" mode="widthFix" class="response"></image>
 			<view class="nav-list">
-				<view class="bg-white nav-li box-list" style="height: 200upx;">
-					<navigator class="box-li" hover-class="hover-on">
+				<view class="bg-white nav-li box-list" style="height: 200upx;" v-if="!userInfo.userId">
+					<view class="box-li" @tap="LoginMoal">
+						<image src="/static/source.png" mode="widthFix" class="box-icon"></image>
+						<text>成绩</text>
+					</view>
+					<view class="box-li" @tap="LoginMoal">
+						<image src="/static/leave.png" mode="widthFix" class="box-icon"></image>
+						<text>请假</text>
+					</view>
+					<view class="box-li" @tap="LoginMoal">
+						<image src="/static/card.png" mode="widthFix" class="box-icon"></image>
+						<text>一卡通</text>
+					</view>
+				</view>
+				<view class="bg-white nav-li box-list" style="height: 200upx;" v-else-if="userInfo.userId&&!userInfo.isBind">
+					<navigator url="/pages/component/bind/bind" class="box-li" hover-class="hover-on">
 						<image src="/static/source.png" mode="widthFix" class="box-icon"></image>
 						<text>成绩</text>
 					</navigator>
-					<navigator class="box-li" hover-class="hover-on">
+					<navigator url="/pages/component/bind/bind" class="box-li" hover-class="hover-on">
 						<image src="/static/leave.png" mode="widthFix" class="box-icon"></image>
 						<text>请假</text>
 					</navigator>
-					<navigator class="box-li" hover-class="hover-on">
+					<navigator url="/pages/component/bind/bind" class="box-li" hover-class="hover-on">
+						<image src="/static/card.png" mode="widthFix" class="box-icon"></image>
+						<text>一卡通</text>
+					</navigator>
+				</view>
+				<view class="bg-white nav-li box-list" style="height: 200upx;" v-else>
+					<navigator url="/pages/component/exam/exam" class="box-li" hover-class="hover-on">
+						<image src="/static/source.png" mode="widthFix" class="box-icon"></image>
+						<text>成绩</text>
+					</navigator>
+					<navigator url="/pages/component/leave/leave" class="box-li" hover-class="hover-on">
+						<image src="/static/leave.png" mode="widthFix" class="box-icon"></image>
+						<text>请假</text>
+					</navigator>
+					<navigator url="/pages/component/ecard/ecard" class="box-li" hover-class="hover-on">
 						<image src="/static/card.png" mode="widthFix" class="box-icon"></image>
 						<text>一卡通</text>
 					</navigator>
@@ -23,23 +51,32 @@
 							<text class="cuIcon-title text-theme "></text> 下节课
 						</view>
 						<view class="action">
-							<text class="today">2019-08-16</text>
+							<text class="today">{{today}}</text>
 							<view class="cu-tag bg-theme round shadow-warp" style="color: #fff;">
-								星期五
+								{{week}}
 							</view>
 						</view>
 					</view>
 					<view class="padding next-class">
 						<view class="un-login-auth">
-							<button class="cu-btn round lg bg-theme display-none" style="color: #fff;">未登录</button>
-							<button class="cu-btn round lg bg-theme display-none" style="color: #fff;">同步数据</button>
+							<view v-if="!userInfo.isBind&&userInfo.userId">
+								<navigator url="/pages/component/bind/bind" hover-class="hover-on">
+									<button class="cu-btn round lg bg-theme" style="color: #fff;">绑定学号</button>
+								</navigator>
+							</view>
+							<view v-else-if="!userInfo.userId">
+								<button open-type="getUserInfo" @getuserinfo="login" class="cu-btn round lg bg-theme" style="color: #fff;">未登录</button>
+							</view>
+							<view v-else-if="!next">
+								<button open-type="getUserInfo" @getuserinfo="getNextClass" class="cu-btn round lg bg-theme" style="color: #fff;">今天你没课了 ^_^</button>
+							</view>
 						</view>
-						<view class="class-card">
+						<view class="class-card" :class="(userInfo.userId&&userInfo.isBind&&next)?'':'display-none'">
 							<view class="cu-item">
 								<view class="content">
 									<view class="week text-theme">
 										<text>
-											15
+											{{next.weekly}}
 											<text class="week-text">周</text>
 										</text>
 									</view>
@@ -47,14 +84,14 @@
 										<view class="text-content">
 											<view class="class-name">
 												<text>
-													大学生心理健康教育
+													{{next.name}}
 												</text>
 											</view>
 										</view>
 										<view class="class-info">
-											<view class="cu-tag bg-olive light round class-time" style="font-size: 26upx;">时间：8:00 - 9:00</view>
-											<view class="cu-tag bg-cyan light round" style="font-size: 26upx;">禹兴园3-214</view>
-											<view class="cu-tag bg-green light round" style="font-size: 26upx;">杨永青</view>
+											<view class="cu-tag bg-olive light round class-time" style="font-size: 26upx;">时间：{{next.time}}</view>
+											<view class="cu-tag bg-cyan light round" style="font-size: 26upx;">{{next.class}}</view>
+											<view class="cu-tag bg-green light round" style="font-size: 26upx;">{{next.teacher}}</view>
 										</view>
 									</view>
 								</view>
@@ -82,19 +119,60 @@
 					</view>
 				</view>
 			</view>
+			<view class="cu-modal" :class="showlogin?'show':''">
+				<view class="cu-dialog">
+					<view class="cu-bar bg-white justify-end">
+						<view class="content">登录</view>
+						<view class="action" @tap="LoginMoal">
+							<text class="cuIcon-close text-red"></text>
+						</view>
+					</view>
+					<view class="padding-xl">
+						<button open-type="getUserInfo" @getuserinfo="login" class="cu-btn lg bg-theme"><text class="text-white">微信一键登录</text></button>
+					</view>
+				</view>
+			</view>
 			<view class="cu-tabbar-height"></view>
 		</scroll-view>
 	</view>
 </template>
 
 <script>
+	import {
+		mapState,
+		mapActions
+	} from 'vuex'
+	
+	import {
+		showToast,
+		getStorage
+	} from '@/util'
+	
+	import {
+		getToday,
+		getNextClass
+	} from '@/api'
+	import store from '@/store'
+
 	export default {
+		computed: {
+			...mapState('user', ['userInfo']),
+			...mapState('home', ['week','today','next'])
+		},
+		created() {
+			this.getInit()
+		},
 		data() {
 			return {
-
+				showlogin: false
 			}
 		},
 		methods: {
+			...mapActions('home',['getToday','getNextClass']),
+			getInit(){
+				this.getToday()
+				this.getNextClass()
+			},
 			showMore: function(name) {
 				switch (name) {
 					case "food":
@@ -122,15 +200,58 @@
 						});
 						break;
 				}
+			},
+			LoginMoal() {
+				this.showlogin = !this.showlogin
+			},
+			async login(res) {
+				this.showlogin = false
+				var userInfo = res.detail
+				await uni.checkSession({
+					async success() {
+						//token不存在重新获取						
+						if (!getStorage('token')) {
+							await store.dispatch('user/wxLogin');
+							//重新获取用户信息							
+							uni.getUserInfo({
+								provider: 'weixin',
+								success: function(infoRes) {									
+									store.dispatch('user/getWxInfo', {
+										encryptedData: infoRes.encryptedData,
+										iv: infoRes.iv
+									})
+									store.dispatch('home/getNextClass')									
+								}
+							});						
+						} else {
+							store.dispatch('user/getWxInfo', {
+								encryptedData: userInfo.encryptedData,
+								iv: userInfo.iv
+							})
+							store.dispatch('home/getNextClass')	
+						}
+					},
+					async fail() {
+						await store.dispatch('user/wxLogin');
+						//重新获取用户信息
+						uni.getUserInfo({
+							provider: 'weixin',
+							success: function(infoRes) {									
+								store.dispatch('user/getWxInfo', {
+									encryptedData: infoRes.encryptedData,
+									iv: infoRes.iv
+								})			
+								store.dispatch('home/getNextClass')	
+							}
+						});	
+					}
+				})			
 			}
-		},
-		onReady: function() {
-
 		}
 	}
 </script>
 
-<style>
+<style scoped>
 	.page {
 		height: 100vh;
 		padding-bottom: 30upx;

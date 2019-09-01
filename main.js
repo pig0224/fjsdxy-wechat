@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import App from './App'
+import store from '@/store'
 
 import home from './pages/component/home/home.vue'
 Vue.component('home', home)
@@ -14,10 +15,12 @@ import cuCustom from './colorui/components/cu-custom.vue'
 Vue.component('cu-custom', cuCustom)
 
 Vue.version = 'v0.0.1' //版本号
-
+Vue.prototype.$store = store
 Vue.config.productionTip = false
 
 const app = new Vue({
+	store,
 	...App
 })
+
 app.$mount()

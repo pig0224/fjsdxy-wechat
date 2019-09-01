@@ -24,7 +24,10 @@
             "style" : {
 				"backgroundColor":"#f4f4f4"
 			}
-        }
+        }, {
+			"path": "pages/component/bind/bind",
+			"style": {}
+		}
     ],
 	"globalStyle": {
 		"mp-alipay": {
