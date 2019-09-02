@@ -30,7 +30,7 @@
 					// #ifdef MP-WEIXIN
 					Vue.prototype.StatusBar = e.statusBarHeight;
 					let customWx = wx.getMenuButtonBoundingClientRect();
-					if (customWx.bottom==0) {
+					if (!customWx.bottom) {
 						Vue.prototype.CustomBar = e.statusBarHeight + 50;
 					} else {
 						Vue.prototype.Custom = customWx;
@@ -39,8 +39,8 @@
 					// #endif		
 					// #ifdef MP-QQ	
 					Vue.prototype.StatusBar = e.statusBarHeight;
-					let customQQ = qq.getMenuButtonBoundingClientRect();
-					if (customQQ.bottom==0) {
+					let customQQ = qq.getMenuButtonBoundingClientRect();					
+					if (!customQQ.bottom) {
 						Vue.prototype.CustomBar = e.statusBarHeight + 50;						
 					} else {
 						Vue.prototype.Custom = customQQ;
