@@ -8,7 +8,9 @@ import {
 import {
 	wxLogin,
 	getUserInfo,
-	getWxInfo
+	getWxInfo,
+	qqLogin,
+	getQQInfo
 } from '@/api'
 
 
@@ -57,6 +59,7 @@ const actions = {
 		state
 	}) {
 		return new Promise((resolve, reject) => {
+			// #ifdef MP-WEIXIN
 			uni.login({
 				provider: 'weixin',
 				success: function(loginRes) {
@@ -69,6 +72,21 @@ const actions = {
 					})
 				}
 			});
+			// #endif
+			// #ifdef MP-QQ
+			uni.login({
+				provider: 'qq',
+				success: function(loginRes) {
+					// 获取用户信息
+					qqLogin(loginRes.code).then(res => {
+						if (res.data.status == 200) {
+							commit('setToken', res.data.data.token)
+							resolve()
+						}
+					})
+				}
+			});
+			// #endif
 		})
 	},
 	getUserInfo({
@@ -101,14 +119,36 @@ const actions = {
 		encryptedData,
 		iv
 	}) {
+		// #ifdef MP-WEIXIN
 		getWxInfo({
 			encryptedData,
 			iv
-		}).then(res => {
+		}).then(res => {	
 			var data = res.data
-			dispatch('getUserInfo')
-			this.dispatch('student/getStudentInfo')
-			if (data.status == 200) {				
+			if (data.status == 200) {					
+				dispatch('getUserInfo')
+				this.dispatch('student/getStudentInfo')
+				showToast({
+					type: 'success',
+					msg: "登录成功"
+				})				
+			} else {
+				showToast({
+					type: 'err',
+					msg: "登录失败"
+				})			
+			}
+		})
+		// #endif
+		// #ifdef MP-QQ
+		getQQInfo({
+			encryptedData,
+			iv
+		}).then(res => {	
+			var data = res.data
+			if (data.status == 200) {	
+				dispatch('getUserInfo')
+				this.dispatch('student/getStudentInfo')
 				showToast({
 					type: 'success',
 					msg: "登录成功"
@@ -120,6 +160,7 @@ const actions = {
 				})
 			}
 		})
+		// #endif
 	}
 }
 

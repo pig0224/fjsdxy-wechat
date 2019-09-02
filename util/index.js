@@ -39,11 +39,13 @@ export const showToast = ({
 			image = '/static/suc.png'
 			break;
 	}
-	uni.showToast({
-		title: msg,
-		image: image,
-		duration: 2000
-	});
+	setTimeout(function(){
+		uni.showToast({
+			title: msg,
+			image: image,
+			duration: 2000
+		});
+	},500)	
 }
 
 export const getToday = () => {

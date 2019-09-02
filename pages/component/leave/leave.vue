@@ -83,17 +83,18 @@
 				revokeLeave(id).then(res=>{
 					var ret = res.data 
 					if(ret.status == 200){
+						this.getLeave()
 						showToast({
 							type:"success",
 							msg:"撤销成功"
 						})
-						this.getLeave()
+						
 					}else{
+						this.getLeave()
 						showToast({
 							type:"success",
 							msg:"撤销异常"
-						})
-						this.getLeave()
+						})						
 					}
 				})
 				

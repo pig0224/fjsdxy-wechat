@@ -108,17 +108,23 @@
 </template>
 
 <script>
-	import {isPhone,isBeforeDate} from '@/util'
+
+	import {isPhone,isBeforeDate,getToday} from '@/util'
 	import {applyLeave} from '@/api'
 	export default {
+		created() {
+			var todayDate = getToday()
+			this.startDate = todayDate
+			this.endDate = todayDate
+		},
 		data() {
 			return {
-				startDate: "请选择",
+				startDate: "",
 				startIndex: 0,
 				startTime: ["00点", "01点", "02点", "03点", "04点", "05点", "06点", "07点", "08点", "09点", "10点", "11点", "12点", "13点", "14点",
 					"15点", "16点", "17点", "18点", "19点", "20点", "21点", "22点", "23点"
 				],
-				endDate: "请选择",
+				endDate: "",
 				endIndex: 0,
 				endTime: ["00点", "01点", "02点", "03点", "04点", "05点", "06点", "07点", "08点", "09点", "10点", "11点", "12点", "13点", "14点",
 					"15点", "16点", "17点", "18点", "19点", "20点", "21点", "22点", "23点"

@@ -24,6 +24,22 @@ export const getWxInfo = ({
 	})
 }
 
+export const qqLogin = (code) => {
+	return request.post('/qq/login', {
+		"code": code
+	})
+}
+
+export const getQQInfo = ({
+	encryptedData,
+	iv
+}) => {
+	return request.post('/qq/getInfo', {
+		encryptedData,
+		iv
+	})
+}
+
 export const Bind = (data) => {
 	return request.post('/student/bind',data)
 }

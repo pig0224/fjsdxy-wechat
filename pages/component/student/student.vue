@@ -76,7 +76,12 @@
 				</navigator>
 				<view v-else class="content" @tap="LoginMoal">
 					<text class="cuIcon-people text-theme"></text>
+					<!-- #ifdef MP-WEIXIN -->
 					<text class="text-grey">微信快捷登录</text>
+					<!-- #endif -->
+					<!-- #ifdef MP-QQ -->
+					<text class="text-grey">QQ快捷登录</text>
+					<!-- #endif -->			
 				</view>
 			</view>
 		</view>
@@ -98,7 +103,12 @@
 					</view>
 				</view>
 				<view class="padding-xl">
+					<!-- #ifdef MP-WEIXIN -->
 					<button open-type="getUserInfo" @getuserinfo="login" class="cu-btn lg bg-theme"><text class="text-white">微信一键登录</text></button>
+					<!-- #endif -->
+					<!-- #ifdef MP-QQ -->
+					<button open-type="getUserInfo" @getuserinfo="login" class="cu-btn lg bg-theme"><text class="text-white">QQ一键登录</text></button>
+					<!-- #endif -->					
 				</view>
 			</view>
 		</view>
@@ -129,10 +139,18 @@
 		},
 		methods: {
 			showQrcode() {
+				// #ifdef MP-WEIXIN
 				uni.previewImage({
 					urls: ['https://fjsdxy.yunserver.com/static/img/zanCode.jpg'],
 					current: 'https://fjsdxy.yunserver.com/static/img/zanCode.jpg' // 当前显示图片的http链接    
 				})
+				// #endif	
+				// #ifdef MP-QQ
+				uni.previewImage({
+					urls: ['https://fjsdxy.yunserver.com/static/img/qqcode.jpg'],
+					current: 'https://fjsdxy.yunserver.com/static/img/qqcode.jpg' // 当前显示图片的http链接    
+				})
+				// #endif
 			},
 			LoginMoal() {
 				this.showlogin = !this.showlogin

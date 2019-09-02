@@ -32,10 +32,7 @@
 		},
 		{
 			"path": "pages/component/bind/bind",
-			"style": {
-				"backgroundColor": "#ffffff",
-				"enablePullDownRefresh": true
-			}
+			"style": {}
 		},
 		{
 			"path": "pages/component/leave/leave",
@@ -59,7 +56,7 @@
 			"allowsBounceVertical": "NO"
 		},
 		"navigationBarBackgroundColor": "#0081ff",
-		"navigationBarTitleText": "水院课表",
+		"navigationBarTitleText": "We水院",
 		"navigationStyle": "custom",
 		"navigationBarTextStyle": "white"
 	},

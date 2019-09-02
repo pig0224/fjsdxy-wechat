@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<view v-if="PageCur=='index'">			
+		<view v-if="PageCur=='index'">					
 			<home></home>
 		</view>
 		<view v-if="PageCur=='kcb'">			

@@ -128,7 +128,12 @@
 						</view>
 					</view>
 					<view class="padding-xl">
+						<!-- #ifdef MP-WEIXIN -->						
 						<button open-type="getUserInfo" @getuserinfo="login" class="cu-btn lg bg-theme"><text class="text-white">微信一键登录</text></button>
+						<!-- #endif -->
+						<!-- #ifdef MP-QQ -->
+						<button open-type="getUserInfo" @getuserinfo="login" class="cu-btn lg bg-theme"><text class="text-white">QQ一键登录</text></button>
+						<!-- #endif -->	
 					</view>
 				</view>
 			</view>

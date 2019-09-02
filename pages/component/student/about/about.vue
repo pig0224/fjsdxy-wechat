@@ -1,5 +1,5 @@
 <template>
-	<view class="container">
+	<view class="container"> 
 		<cu-custom bgColor="bg-gradual-green" :isBack="true"><view slot="backText">返回</view><view slot="content">关于</view></cu-custom>
 		<view class="content">
 			<view class="version">

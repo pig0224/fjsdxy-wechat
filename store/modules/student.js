@@ -47,15 +47,16 @@ const actions = {
 				this.dispatch('home/getNextClass')
 				this.dispatch('source/getCourse')
 				this.dispatch('source/getWeekInfo')
-				showToast({
-					type:'success',
-					msg:'绑定成功'
-				})
-				setTimeout(function(){
-					uni.navigateBack({
-					    delta: 1
-					});
-				},500)
+				uni.showModal({
+					title: '提示',
+					content: '绑定成功',
+					showCancel:false,
+					success() {
+						uni.navigateBack({
+						    delta: 1
+						});
+					}
+				});
 			}else{
 				uni.showModal({ 
 					title: '提示',
