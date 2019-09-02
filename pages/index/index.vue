@@ -54,15 +54,15 @@
 				this.PageCur = e.currentTarget.dataset.cur
 				this.getInfo()
 			},
-			getInfo() {		
-				this.getToday()			
+			getInfo() {						
 				if (store.state.user.userInfo.userId) {
 					store.dispatch('user/getUserInfo')
 					if (store.state.user.userInfo.isBind) {
-						store.dispatch('student/getStudentInfo')
-						this.getNextClass()
+						store.dispatch('student/getStudentInfo')						
 					}
 				}
+				this.getToday()
+				this.getNextClass()
 			}
 		}
 	}

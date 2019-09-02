@@ -206,7 +206,8 @@
 				this.getWeekInfo(date)
 			},
 			weekSelect(e) {
-				this.isWeek = e.currentTarget.dataset.id;
+				store.commit('source/setIsWeek',e.currentTarget.dataset.id)
+				//this.isWeek = e.currentTarget.dataset.id;
 			},
 			isClass(addr) {
 				var course = this.courses

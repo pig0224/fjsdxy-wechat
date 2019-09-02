@@ -11,7 +11,7 @@
 		</view>
 		<view v-else>
 			<view class="UCenter-bg" @click="LoginMoal">
-				<image src="/static/avator.jpg" class="round" mode="widthFix"></image>
+				<image src="https://fjsdxy.yunserver.com/static/img/avator.jpg" class="round" mode="widthFix"></image>
 				<view class="margin-top-sm">
 					<text class="text-xl">未登录</text>
 				</view>
