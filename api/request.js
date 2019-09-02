@@ -3,8 +3,7 @@ import {
 	getStorage
 } from '@/util'
 
-const baseURL = "http://127.0.0.1:8080/v1"
-//const baseURL = "https://fjsdxy.yunserver.com/v1"
+const baseURL = "https://fjsdxy.yunserver.com/v1"
 
 var Header = {
 	"content-type": "application/x-www-form-urlencoded"

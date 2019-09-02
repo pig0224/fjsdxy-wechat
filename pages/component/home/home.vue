@@ -1,7 +1,7 @@
 <template>
 	<view>
 		<scroll-view scroll-y class="page">
-			<image src="/static/home_bg.png" mode="widthFix" class="response"></image>
+			<image src="https://fjsdxy.yunserver.com/static/img/home_bg.png" mode="widthFix" class="response"></image>
 			<view class="nav-list">
 				<view class="bg-white nav-li box-list" style="height: 200upx;" v-if="!userInfo.userId">
 					<view class="box-li" @tap="LoginMoal">
@@ -148,31 +148,19 @@
 		getStorage
 	} from '@/util'
 	
-	import {
-		getToday,
-		getNextClass
-	} from '@/api'
 	import store from '@/store'
 
 	export default {
 		computed: {
 			...mapState('user', ['userInfo']),
 			...mapState('home', ['week','today','next'])
-		},
-		created() {
-			this.getInit()
-		},
+		},		
 		data() {
 			return {
 				showlogin: false
 			}
 		},
 		methods: {
-			...mapActions('home',['getToday','getNextClass']),
-			getInit(){
-				this.getToday()
-				this.getNextClass()
-			},
 			showMore: function(name) {
 				switch (name) {
 					case "food":

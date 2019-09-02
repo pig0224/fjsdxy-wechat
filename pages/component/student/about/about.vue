@@ -25,31 +25,13 @@
 				<text class="desc-content">We水院更是个百事通，校内头条、教务公告、OA公告、会议通知、学术讲座、综合新闻等，随时随地即能了解校园动态，还能预览与下载附件，掌上办公，指日可待。</text>
 				<text class="desc-content">We水院更是/更有... （期待您的发现）</text>
 			</view>
-			<view class="log-list" v-else>
-				<!-- <view class="describe">
-					<view class="desc-title">
-						<text class="desc-v">v0.1.4 公测版</text>
-						<text class="desc-time">2017.08.02</text>
-					</view>
-					<text class="desc-content">修复BUG</text>
-					<view class="desc-list">
-						<text class="desc-list-item">修复假期不显示课表，改为显示下学期课表</text>
-						<text class="desc-list-item">修复课表鬼畜抖动特效</text>
-					</view>
-					<text class="desc-content">优化完善</text>
-					<view class="desc-list">
-						<text class="desc-list-item">优化空教室可以多选时间段查询</text>
-						<text class="desc-list-item">新增四六级查询功能</text>
-						<text class="desc-list-item">新增志愿者时长查询功能</text>
-					</view>
-				</view>
-				 -->
+			<view class="log-list" v-else>				
 				<view class="describe">
 					<view class="desc-title">
-						<text class="desc-v">v0.0.6 内测版</text>
-						<text class="desc-time">2019.08.17</text>
+						<text class="desc-v">v1.0.0 公测版</text>
+						<text class="desc-time">2019.09.02</text>
 					</view>
-					<text class="desc-content">开启内测</text>
+					<text class="desc-content">开启水院全员公测测</text>
 				</view>
 			</view>
 		</view>

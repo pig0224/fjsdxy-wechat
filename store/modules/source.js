@@ -32,7 +32,7 @@ const mutations = {
 const actions = {
 	getCourse({
 		commit
-	}, date) {
+	}, date) {		
 		date = date ? date : getToday()
 		getCourse(date).then(res => {
 			var ret = res.data

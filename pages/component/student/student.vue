@@ -6,7 +6,7 @@
 				<view class="margin-top-sm">
 					<text class="text-xl">{{userInfo.nickName}}</text>
 				</view>
-				<image src="/static/wave.gif" mode="scaleToFill" class="gif-wave"></image>
+				<image src="https://fjsdxy.yunserver.com/static/img/wave.gif" mode="scaleToFill" class="gif-wave"></image>
 			</view>
 		</view>
 		<view v-else>
@@ -15,7 +15,7 @@
 				<view class="margin-top-sm">
 					<text class="text-xl">未登录</text>
 				</view>
-				<image src="/static/wave.gif" mode="scaleToFill" class="gif-wave"></image>
+				<image src="https://fjsdxy.yunserver.com/static/img/wave.gif" mode="scaleToFill" class="gif-wave"></image>
 			</view>
 		</view>
 
@@ -130,8 +130,8 @@
 		methods: {
 			showQrcode() {
 				uni.previewImage({
-					urls: ['https://image.weilanwl.com/color2.0/zanCode.jpg'],
-					current: 'https://image.weilanwl.com/color2.0/zanCode.jpg' // 当前显示图片的http链接    
+					urls: ['https://fjsdxy.yunserver.com/static/img/zanCode.jpg'],
+					current: 'https://fjsdxy.yunserver.com/static/img/zanCode.jpg' // 当前显示图片的http链接    
 				})
 			},
 			LoginMoal() {
@@ -190,7 +190,7 @@
 	}
 
 	.UCenter-bg {
-		background-image: url(https://image.weilanwl.com/color2.0/index.jpg);
+		background-image: url(https://fjsdxy.yunserver.com/static/img/student_bg.jpg);
 		background-size: cover;
 		height: 550upx;
 		display: flex;

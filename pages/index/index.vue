@@ -33,24 +33,34 @@
 </template>
 
 <script>
+	import {
+		mapState,
+		mapActions
+	} from 'vuex'
 	import store from '@/store'
 	
 	export default {
+		onShow() {
+			this.getInfo()
+		},
 		data() {
 			return {
 				PageCur: 'index'
 			}
 		},
 		methods: {
+			...mapActions('home',['getToday','getNextClass']),
 			NavChange: function(e) {
 				this.PageCur = e.currentTarget.dataset.cur
 				this.getInfo()
 			},
-			getInfo() {
+			getInfo() {		
+				this.getToday()			
 				if (store.state.user.userInfo.userId) {
 					store.dispatch('user/getUserInfo')
 					if (store.state.user.userInfo.isBind) {
 						store.dispatch('student/getStudentInfo')
+						this.getNextClass()
 					}
 				}
 			}

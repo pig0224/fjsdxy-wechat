@@ -1,5 +1,5 @@
 {
-    "name" : "水院课表",
+    "name" : "We水院",
     "appid" : "__UNI__B0A3D56",
     "description" : "",
     "versionName" : "1.0.0",
@@ -57,12 +57,13 @@
         /* 小程序特有相关 */
         "appid" : "wxad6b6fa4e26bf6fd",
         "setting" : {
-            "urlCheck" : false,
+            "urlCheck" : true,
             "es6" : true,
             "postcss" : true,
             "minified" : true
         },
-        "usingComponents" : true
+        "usingComponents" : true,
+        "permission" : {}
     },
     "mp-toutiao" : {
         "setting" : {
