@@ -42,8 +42,7 @@ const actions = {
 	},
 	getNextClass({
 		commit
-	}) {
-		
+	}) {		
 		getNextClass().then(res => {
 			var ret = res.data					
 			if(ret.status == 200){

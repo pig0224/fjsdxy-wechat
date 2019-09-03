@@ -16,7 +16,7 @@
 			}
 		},
 		onLaunch: function() {
-			//console.log('App Launch')		
+			//console.log('App Launch')					
 			uni.getSystemInfo({
 				success: function(e) {
 					// #ifndef MP
@@ -53,7 +53,7 @@
 					// #endif					
 				}
 			})
-
+			uni.showShareMenu()
 		},
 		onShow: function() {
 			console.log('App Show')
