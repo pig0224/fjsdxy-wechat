@@ -63,41 +63,44 @@
 	export default {
 		onShow() {
 			this.getLeave()
-		},		
+		},
+		onLoad() {
+			uni.showShareMenu()
+		},
 		data() {
-			return {				
+			return {
 				list: []
 			}
 		},
 		methods: {
-			getLeave(){
-				return getLeaveList().then(res=>{
+			getLeave() {
+				return getLeaveList().then(res => {
 					var ret = res.data
-					if(ret.status == 200){
+					if (ret.status == 200) {
 						this.list = ret.data
 					}
 				})
 			},
-			revokeLeave(e){
+			revokeLeave(e) {
 				var id = e.currentTarget.dataset.id
-				revokeLeave(id).then(res=>{
-					var ret = res.data 
-					if(ret.status == 200){
+				revokeLeave(id).then(res => {
+					var ret = res.data
+					if (ret.status == 200) {
 						this.getLeave()
 						showToast({
-							type:"success",
-							msg:"撤销成功"
+							type: "success",
+							msg: "撤销成功"
 						})
-						
-					}else{
+
+					} else {
 						this.getLeave()
 						showToast({
-							type:"success",
-							msg:"撤销异常"
-						})						
+							type: "success",
+							msg: "撤销异常"
+						})
 					}
 				})
-				
+
 			}
 		},
 		async onPullDownRefresh() {
@@ -139,12 +142,14 @@
 		text-overflow: ellipsis;
 		white-space: nowrap;
 	}
-	.leave-revoke{
+
+	.leave-revoke {
 		width: 300upx;
 		margin: 0 auto;
 		padding-top: 20upx;
 	}
-	.leave-revoke button{
+
+	.leave-revoke button {
 		width: 100%;
 	}
 </style>

@@ -52,7 +52,7 @@
 					Vue.prototype.CustomBar = e.statusBarHeight + e.titleBarHeight;
 					// #endif					
 				}
-			})
+			})		
 			uni.showShareMenu()
 		},
 		onShow: function() {

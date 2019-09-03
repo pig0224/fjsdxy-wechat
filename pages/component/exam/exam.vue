@@ -49,6 +49,9 @@
 		created() {
 			this.getExam()
 		},
+		onLoad() {
+			uni.showShareMenu()
+		},
 		data() {
 			return {
 				exams: ""

@@ -117,17 +117,17 @@
 	export default {
 		created() {
 			this.getInit()
-		},
+		},		
 		computed: {
 			...mapState('user', ['userInfo']),
-			...mapState('source',['isWeek','weekly','week','courses'])
+			...mapState('source', ['isWeek', 'weekly', 'week', 'courses'])
 		},
 		components: {
 			uniCalendar
 		},
 		data() {
 			return {
-				"today": "",				
+				"today": "",
 				"classTime": [{
 						"begin": "08:00",
 						"over": "08:45"
@@ -179,8 +179,8 @@
 			}
 		},
 		methods: {
-			...mapActions('source',['getCourse','getWeekInfo']),
-			getInit(){
+			...mapActions('source', ['getCourse', 'getWeekInfo']),
+			getInit() {
 				if (store.state.user.userInfo.userId && store.state.user.userInfo.isBind) {
 					var todayDate = getToday()
 					this.getCourse(todayDate)
@@ -206,13 +206,13 @@
 				this.getWeekInfo(date)
 			},
 			weekSelect(e) {
-				store.commit('source/setIsWeek',e.currentTarget.dataset.id)
+				store.commit('source/setIsWeek', e.currentTarget.dataset.id)
 				//this.isWeek = e.currentTarget.dataset.id;
 			},
 			isClass(addr) {
 				var course = this.courses
 				for (var i = 0; i < course.length; i++) {
-					if (addr == course[i]["Position"].substring(0, 2)) {						
+					if (addr == course[i]["Position"].substring(0, 2)) {
 						return i
 					}
 				}
@@ -223,7 +223,7 @@
 				this.today = todayDate
 				this.getCourse(todayDate)
 				this.getWeekInfo(todayDate)
-			},			
+			},
 			login(res) {
 				this.showlogin = false
 				var userInfo = res.detail

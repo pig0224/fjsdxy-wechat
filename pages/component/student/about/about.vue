@@ -57,6 +57,9 @@
 				year: new Date().getFullYear()
 			}
 		},
+		onLoad() {
+			uni.showShareMenu()
+		},
 		methods: {
 			toggleLog(){
 				 this.showLog = !this.showLog

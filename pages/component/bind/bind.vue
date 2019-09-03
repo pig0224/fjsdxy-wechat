@@ -36,6 +36,9 @@
 				password: ""
 			}
 		},
+		onLoad() {
+			uni.showShareMenu()
+		},
 		methods: {
 			...mapActions('student', ['Bind']),
 			bind() {

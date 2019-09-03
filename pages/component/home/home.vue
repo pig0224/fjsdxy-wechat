@@ -68,7 +68,8 @@
 								<button open-type="getUserInfo" @getuserinfo="login" class="cu-btn round lg bg-theme" style="color: #fff;">未登录</button>
 							</view>
 							<view v-else-if="!next">
-								<button open-type="getUserInfo" @getuserinfo="getNextClass" class="cu-btn round lg bg-theme" style="color: #fff;">今天你没课了 ^_^</button>
+								<button open-type="getUserInfo" @getuserinfo="getNextClass" class="cu-btn round lg bg-theme" style="color: #fff;">今天你没课了
+									^_^</button>
 							</view>
 						</view>
 						<view class="class-card" :class="(userInfo.userId&&userInfo.isBind&&next)?'':'display-none'">
@@ -100,6 +101,7 @@
 					</view>
 
 				</view>
+				<!-- #ifdef MP-WEIXIN -->
 				<view class="bg-white nav-li box-list" style="height: 150upx;margin-top: 30upx;">
 					<view class="home-b" hover-class="hover-on" v-on:click="showMore('food')">
 						<image src="/static/food.png" mode="widthFix" class="box-icon"></image>
@@ -118,6 +120,27 @@
 						<text>合作申请</text>
 					</view>
 				</view>
+				<!-- #endif -->
+				<!-- #ifdef MP-QQ -->
+				<view class="bg-white nav-li box-list" style="height: 150upx;margin-top: 30upx;">					
+					<button open-type="openGroupProfile" group-id="312092550" class="home-b" hover-class="button-hover">
+						<image src="/static/food.png" mode="widthFix" class="box-icon"></image>
+						<text>美食外卖</text>
+					</button> 
+					<button open-type="openGroupProfile" group-id="312092550" class="home-b" hover-class="button-hover">
+						<image src="/static/run.png" mode="widthFix" class="box-icon"></image>
+						<text>跑腿服务</text>
+					</button>
+					<button open-type="openGroupProfile" group-id="312092550" class="home-b" hover-class="button-hover">
+						<image src="/static/shop.png" mode="widthFix" class="box-icon"></image>
+						<text>生活百货</text>
+					</button>
+					<button open-type="openGroupProfile" group-id="312092550" class="home-b" hover-class="button-hover">
+						<image src="/static/business.png" mode="widthFix" class="box-icon"></image>
+						<text>合作申请</text>
+					</button>
+				</view>
+				<!-- #endif -->
 			</view>
 			<view class="cu-modal" :class="showlogin?'show':''">
 				<view class="cu-dialog">
@@ -128,12 +151,12 @@
 						</view>
 					</view>
 					<view class="padding-xl">
-						<!-- #ifdef MP-WEIXIN -->						
+						<!-- #ifdef MP-WEIXIN -->
 						<button open-type="getUserInfo" @getuserinfo="login" class="cu-btn lg bg-theme"><text class="text-white">微信一键登录</text></button>
 						<!-- #endif -->
 						<!-- #ifdef MP-QQ -->
 						<button open-type="getUserInfo" @getuserinfo="login" class="cu-btn lg bg-theme"><text class="text-white">QQ一键登录</text></button>
-						<!-- #endif -->	
+						<!-- #endif -->
 					</view>
 				</view>
 			</view>
@@ -147,19 +170,19 @@
 		mapState,
 		mapActions
 	} from 'vuex'
-	
+
 	import {
 		showToast,
 		getStorage
 	} from '@/util'
-	
+
 	import store from '@/store'
 
 	export default {
 		computed: {
 			...mapState('user', ['userInfo']),
-			...mapState('home', ['week','today','next'])
-		},		
+			...mapState('home', ['week', 'today', 'next'])
+		},
 		data() {
 			return {
 				showlogin: false
@@ -208,20 +231,20 @@
 							//重新获取用户信息							
 							uni.getUserInfo({
 								provider: 'weixin',
-								success: function(infoRes) {									
+								success: function(infoRes) {
 									store.dispatch('user/getWxInfo', {
 										encryptedData: infoRes.encryptedData,
 										iv: infoRes.iv
 									})
-									store.dispatch('home/getNextClass')									
+									store.dispatch('home/getNextClass')
 								}
-							});						
+							});
 						} else {
 							store.dispatch('user/getWxInfo', {
 								encryptedData: userInfo.encryptedData,
 								iv: userInfo.iv
 							})
-							store.dispatch('home/getNextClass')	
+							store.dispatch('home/getNextClass')
 						}
 					},
 					async fail() {
@@ -229,16 +252,16 @@
 						//重新获取用户信息
 						uni.getUserInfo({
 							provider: 'weixin',
-							success: function(infoRes) {									
+							success: function(infoRes) {
 								store.dispatch('user/getWxInfo', {
 									encryptedData: infoRes.encryptedData,
 									iv: infoRes.iv
-								})			
-								store.dispatch('home/getNextClass')	
+								})
+								store.dispatch('home/getNextClass')
 							}
-						});	
+						});
 					}
-				})			
+				})
 			}
 		}
 	}
@@ -289,15 +312,15 @@
 		border-radius: 0 15upx 15upx 0;
 	}
 
+	.box-li>text {
+		text-align: center;
+		padding-top: 10upx;
+	}
+
 	.box-icon {
 		width: 30%;
 		display: block;
 		margin: 0 auto;
-	}
-
-	.box-li text {
-		text-align: center;
-		font-size: 28upx;
 	}
 
 	.home-b {
@@ -307,22 +330,26 @@
 		justify-content: space-around;
 		padding-top: 20upx;
 		padding-bottom: 20upx;
+		padding-left: 0;
+		padding-right: 0;
 	}
 
 	.home-b:first-child {
-		padding-left: 10upx;
+
 		border-radius: 15upx 0 0 15upx;
 	}
 
 	.home-b:last-child {
-		padding-right: 10upx;
+
 		border-radius: 0 15upx 15upx 0;
 	}
 
 	.home-b>text {
 		color: var(--gray);
 		text-align: center;
-		font-size: 22upx;
+		font-size: 24upx;
+		padding-top: 10upx;
+		line-height: 42upx;
 	}
 
 	.today {

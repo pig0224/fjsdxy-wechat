@@ -117,6 +117,9 @@
 			this.startDate = todayDate
 			this.endDate = todayDate
 		},
+		onLoad() {
+			uni.showShareMenu()
+		},
 		data() {
 			return {
 				startDate: "",

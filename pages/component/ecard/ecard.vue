@@ -22,6 +22,9 @@
 		created() {
 			this.getAccount()
 		},
+		onLoad() {
+			uni.showShareMenu()
+		},
 		data() {
 			return {
 				account:{
