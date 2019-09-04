@@ -90,3 +90,7 @@ export const revokeLeave = (Id) =>{
 export const applyLeave = (data) => {
 	return request.post('/leave/apply', data)
 }
+
+export const support = (platform) =>{
+	return request.get('/user/support/'+platform)
+}

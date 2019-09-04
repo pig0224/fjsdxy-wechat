@@ -43,13 +43,22 @@
 					<switch @change="MenuCard" :class="menuCard?'checked':''" :checked="menuCard?true:false"></switch>
 				</view>
 			</view> -->
+			<!-- #ifdef MP-WEIXIN -->
 			<view class="cu-item arrow">
 				<view class="content" @click="showQrcode">
 					<text class="cuIcon-appreciatefill text-red"></text>
 					<text class="text-grey">赞赏支持</text>
 				</view>
 			</view>
-
+			<!-- #endif -->
+			<!-- #ifdef MP-QQ -->
+			<view class="cu-item arrow">
+				<view class="content" @click="support">
+					<text class="cuIcon-appreciatefill text-red"></text>
+					<text class="text-grey">鼓励支持</text>
+				</view>
+			</view>
+			<!-- #endif -->
 			<view class="cu-item arrow">
 				<button class="cu-btn content" open-type="feedback">
 					<text class="cuIcon-writefill text-cyan"></text>
@@ -125,7 +134,10 @@
 		mapState
 	} from 'vuex'
 	import store from '@/store'
-
+	import {
+		support
+	} from '@/api'
+	
 	export default {
 		computed: {
 			...mapState('user', ['userInfo']),
@@ -138,19 +150,38 @@
 			}
 		},
 		methods: {
-			showQrcode() {
+			support(){
+				var platform = "wechat";
 				// #ifdef MP-WEIXIN
+				platform = "wechat";
+				// #endif
+				// #ifdef MP-QQ	
+				platform = "qq";
+				// #endif
+				support(platform).then(res=>{
+					var ret = res.data
+					if(ret.status == 200){
+						if(ret.data.state){
+							showToast({
+								type:'success',
+								msg:'感谢支持'
+							})
+						}else{
+							this.showQrcode()
+						}
+					}else{
+						showToast({
+							type:'error',
+							msg:'网络异常'
+						})
+					}
+				})
+			},
+			showQrcode() {
 				uni.previewImage({
 					urls: ['https://fjsdxy.yunserver.com/static/img/zanCode.jpg'],
 					current: 'https://fjsdxy.yunserver.com/static/img/zanCode.jpg' // 当前显示图片的http链接    
 				})
-				// #endif	
-				// #ifdef MP-QQ
-				uni.previewImage({
-					urls: ['https://fjsdxy.yunserver.com/static/img/qqcode.jpg'],
-					current: 'https://fjsdxy.yunserver.com/static/img/qqcode.jpg' // 当前显示图片的http链接    
-				})
-				// #endif
 			},
 			LoginMoal() {
 				this.showlogin = !this.showlogin
